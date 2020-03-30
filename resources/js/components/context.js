@@ -1,15 +1,14 @@
 import React from "react";
 
-export default React.createContext({
-    soorah: false,
-    ayah: false,
-    query: "",
-    trans: 1,
-    data: {
-        asd: []
-    },
+const Context = React.createContext({
+    translatorList: [
+        ,
+        "Əlixan Musayev",
+        "Эльмир Кулиев",
+        "Bünyadov-Məmmədəliyev"
+    ],
     soorahList: [
-        "Surələr",
+        ,
         "Fatihə. 1",
         "Bəqərə. 2",
         "Ali İmran. 3",
@@ -124,6 +123,7 @@ export default React.createContext({
         "İxlas. 112",
         "Fələq. 113",
         "Nas. 114"
-    ],
-    searchAction: prayers => {}
+    ]
 });
+
+export default Context;

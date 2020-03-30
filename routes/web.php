@@ -13,4 +13,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'index');
+Route::view('/{any?}', 'index')->where('any', '.*')->name('react');;
+// Route::view('/', 'index');

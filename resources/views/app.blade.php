@@ -43,11 +43,13 @@
 
     <div class="clearfix"><br/><br/><br/></div>
     <footer class="footer">
-      <div class="container text-muted">
-        &copy; 2003-<?=date('Y');?> &nbsp;/&nbsp;
-        <a href="https://www.quran.az">Quran.az</a> &nbsp;/&nbsp;
-        <a href="https://www.nam.az">Nam.az</a> &nbsp;/&nbsp;
-      </div>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active">&copy; 2003-<?=date('Y');?></li>
+          <li class="breadcrumb-item"><a href="https://www.quran.az">Quran.az</a></li>
+          <li class="breadcrumb-item"><a href="https://www.nam.az">Nam.az</a></li>
+        </ol>
+      </nav>
     </footer>
 
     <script src="{{ asset('js/app.js') }}" defer></script>

@@ -4,11 +4,11 @@ class Form extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            s: 1,
+            s: 0,
             a: "",
             t: 1,
-            q: "",
-            view: "soorah"
+            q: "Musa",
+            view: "search"
         };
 
         this.onSoorahChange = this.onSoorahChange.bind(this);
@@ -40,7 +40,7 @@ class Form extends React.Component {
         if (q.length > 3) {
             cond.s = 0;
             cond.a = "";
-            cond.view = "query";
+            cond.view = "search";
         }
         this.setState({ ...cond });
     }

@@ -15,6 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/{s}', 'QuranController@index')->where(['s'=>'[0-9]+']);
-Route::get('/{s}/{a}', 'QuranController@index')->where(['s'=>'[0-9]+', 'a'=>'[0-9]+']);
+Route::get('/{s}/{a}', 'QuranController@ayah')->where(['s'=>'[0-9]+', 'a'=>'[0-9]+']);
 Route::get('/search/{q?}', 'QuranController@search')->where('q', '.+');;
 Route::get('/random/{q?}', 'QuranController@random')->where('q', '.+');;
