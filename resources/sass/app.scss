@@ -5,7 +5,8 @@
 @import "variables";
 
 // Bootstrap
-@import "~bootstrap/scss/bootstrap";
+// @import "~bootstrap/scss/bootstrap";
+@import "bootstrap";
 
 #ornament {
     height: 5em;
@@ -26,10 +27,6 @@
     padding-left: 0;
     padding-right: 0;
     padding-bottom: 0;
-}
-#search form {
-}
-#search table {
 }
 
 #search table thead tr td {

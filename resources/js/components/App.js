@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import ReactDOM from "react-dom";
 import {
     BrowserRouter as Router,
@@ -18,11 +18,7 @@ function App() {
     const context = useContext(Context);
     let history = useHistory();
 
-    useEffect(() => {
-        //
-    });
-
-    function onSearch(form) {
+    const onSearch = form => {
         console.log(form.view);
         switch (form.view) {
             case "search":
@@ -35,7 +31,7 @@ function App() {
                 history.push("/" + form.s + "/" + form.a);
                 break;
         }
-    }
+    };
 
     return (
         <Context.Provider
