@@ -1,0 +1,22 @@
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Nunito");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+#search {
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+}
+#search form {
+}
+#search table {
+}
+
+#search table thead tr td {
+    border-top: 0;
+}
