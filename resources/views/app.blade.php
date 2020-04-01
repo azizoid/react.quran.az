@@ -35,7 +35,7 @@
 
     <div class="container"><div class="row">
 
-      <article class="col-sm-12 col-md-7"><br/>@yield('content')</article>
+      <article class="col-sm-7"><br/>@yield('content')</article>
 
       <sidebar class="col-sm-12 col-md-4"><br/>@include('sidebar')</sidebar>
       

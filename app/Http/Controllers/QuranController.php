@@ -9,41 +9,29 @@ use App\Quran;
 
 class QuranController extends Controller
 {
-    public function index($s=1, $a=null)
+    public function index($s=1)
     {
         $data       =   ['s'=>null, 'a'=>null, 'q'=>null, 't'=>1, 'view'=>'empty'];
+        $out        =   [];
         $view       =   "search";
-        $trans      =   isset($_GET['trans']) && is_numeric($_GET['trans']) && in_array($_GET['trans'], array(1,2,3)) ? $_GET['trans'] : 1;
-        $random     =   isset($_GET['random']) && is_numeric($_GET['random']) && $_GET['random'] ==1 ? 1 : 0;
+        $trans      =   isset($_GET['t']) && is_numeric($_GET['t']) && in_array($_GET['t'], array(1,2,3)) ? $_GET['t'] : 1;
   
         $where      =   ['translator_id'=>$trans];
   
         if(is_numeric($s) && $s>0 && $s<115){
             //
-            $data['view'] = 'soorah';
-            $data['s']  =   $s;
             $where['soorah_id'] = $s;
-  
-            if(is_numeric($a) && $a>0 && $a<287){
-                $data['view'] = 'ayah';
-                $data['a']      = $a;
-                $where['aya_id']= $a;
-            }
             
-            $out = Quran::select('id', 'soorah_id as s', 'aya_id as a', 'content as c')
+            $out = Quran::select('id', 'soorah_id as s', 'aya_id as a', 'content as c', 'translator_id as t')
                     ->where($where)->get();
+
+                    if($out->count() > 0){
+                        $data['view'] = 'soorah';
+                        $data['s']  =   $s;
+                    }
         }
         $data['t'] = $trans;
-  
-        // if(is_string($s) && strlen($s)>3){ 
-        //     $query = htmlspecialchars($s);
-        //     $data['view'] = 'search';
-        //     $data['q'] =  $query;
-        //     $out = Quran::select('id', 'soorah_id as s', 'aya_id as a', 'content as c')
-        //             ->where('content', 'like', '%'.$query.'%')
-        //             ->limit(30)->inRandomOrder()->get();
-        // }
-  
+
         return response()->json(
             compact('out', 'data') 
          );
@@ -52,30 +40,33 @@ class QuranController extends Controller
     public function ayah($s=null, $a=null)
     {
         $data       =   ['s'=>null, 'a'=>null, 'q'=>null, 't'=>1, 'view'=>'empty'];
-        $view       =   "search";
-        $trans      =   isset($_GET['trans']) && is_numeric($_GET['trans']) && in_array($_GET['trans'], array(1,2,3)) ? $_GET['trans'] : 1;
-        $random     =   isset($_GET['random']) && is_numeric($_GET['random']) && $_GET['random'] ==1 ? 1 : 0;
+        $detail = [];
+        $nav = [];
+
+        $trans      =   isset($_GET['t']) && is_numeric($_GET['t']) && in_array($_GET['t'], array(1,2,3)) ? $_GET['t'] : 1;
   
         $where      =   ['translator_id'=>$trans];
   
         if(is_numeric($s) && $s>0 && $s<115){
             $data['s']  =   $s;
             $where['soorah_id'] = $s;
+            
   
             if(is_numeric($a) && $a>0 && $a<287){
-                $data['view'] = 'ayah';
-                $data['a']    = $a;
                 $where2       = ["aya_id" => $a];
             }
             
-            $out = Quran::select('id', 'soorah_id as s', 'aya_id as a', 'content as c')
+            $out = Quran::select('id', 'soorah_id as s', 'aya_id as a', 'content as c', 'translator_id as t')
                     ->where($where)->where($where2)->get();
 
-                    if($out->count()){
+                    if($out->count() > 0){
+                        $data['view'] = 'ayah';
+                        $data['a']    = $a;
+
                         $id = $out->first()->id;
                         $nav['prev']  = Quran::where('id', '<', $id)->where($where)->max('aya_id');
                         $nav['next']  = Quran::where('id', '>', $id)->where($where)->min('aya_id');
-                        $detail        = Quran::find($id)->detail;
+                        $detail       = Quran::find($id)->detail;
                     }
         }
         $data['t'] = $trans;
@@ -87,31 +78,30 @@ class QuranController extends Controller
 
     public function search($q=null)
     {
-        $data       =   ['t'=>1, 'view'=>'empty'];
+        $data       =   ['s'=>null, 'a'=>null, 'q'=>null, 't'=>1, 'view'=>'empty'];
         $view       =   "search";
-        $trans      =   isset($_GET['trans']) && is_numeric($_GET['trans']) && in_array($_GET['trans'], array(1,2,3)) ? $_GET['trans'] : 1;
-        $random     =   isset($_GET['random']) && is_numeric($_GET['random']) && $_GET['random'] ==1 ? 1 : 0;
+        $trans      =   isset($_GET['t']) && is_numeric($_GET['t']) && in_array($_GET['t'], array(1,2,3)) ? $_GET['t'] : 1;
   
-        $where      =   ['translator_id'=>$trans];
+        $where      =   ['translator_id', $trans];
         $out        =   array();
   
         if(is_string($q) && strlen($q)>3){ 
             $query = htmlspecialchars($q);
-            $data['view'] = $view;
-            $data['q'] =  $query;
             // $out = Quran::select('id', 'soorah_id as s', 'aya_id as a', 'content as c')
             //         ->where('content', 'like', '%'.$query.'%')
             //         ->limit(3)->get();
-            $out = Quran::select('id', 'soorah_id as s', 'aya_id as a', 'content as c')
+            $out = Quran::select('id', 'soorah_id as s', 'aya_id as a', 'content as c', 'translator_id as t')
+                    ->where('translator_id', $trans)
                     ->where('content', 'like', '%'.$query.'%')
                     ->paginate(30);
+                    if($out->count() >0){
+                        $data['view'] = $view;
+                        $data['q'] =  $query;
+                    }
         }
 
         $data['t'] = $trans;
   
-        
-        // return new QuranCollection($out);
-        // return new QuranCollection($out);
         return response()->json(
             compact('out', 'data') 
          );
@@ -121,20 +111,22 @@ class QuranController extends Controller
     {
         $data       =   ['s'=>null, 'a'=>null, 'q'=>null, 't'=>1, 'view'=>'empty'];
         $view       =   "search";
-        $trans      =   isset($_GET['trans']) && is_numeric($_GET['trans']) && in_array($_GET['trans'], array(1,2,3)) ? $_GET['trans'] : 1;
-        $random     =   isset($_GET['random']) && is_numeric($_GET['random']) && $_GET['random'] ==1 ? 1 : 0;
-  
-        $where      =   ['translator_id'=>$trans];
+        $trans      =   isset($_GET['t']) && is_numeric($_GET['t']) && in_array($_GET['t'], array(1,2,3)) ? $_GET['t'] : 1;
+        $query      =   $out    =   "";
   
         if(is_string($q) && strlen($q)>3){ 
-            $query = htmlspecialchars($q);
-            $data['view'] = 'search';
-            $data['q'] =  $query;
-            $out = Quran::inRandomOrder()->select('id', 'soorah_id as s', 'aya_id as a', 'content as c')
-                    ->where('content', 'like', '%'.$query.'%')
-                    ->first();
+            $query  =   $data['q']  = htmlspecialchars($q);
+            $data['t'] = $trans;
+
+            $out = Quran::select('id', 'soorah_id as s', 'aya_id as a', 'content as c', 'translator_id as t')
+                ->where("content", "LIKE", "%{$query}%")
+                ->inRandomOrder()
+                ->first();
+
+                if(!empty($out) && $out->count() > 0) {
+                    $data['view'] = "random"; 
+                }else $out = "";
         }
-        $data['t'] = $trans;
   
         return response()->json(
             compact('out', 'data') 

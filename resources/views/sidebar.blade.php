@@ -13,16 +13,8 @@ if($rnd->translator_id==3){
 }
 ?>
 
-<div class="card">
-  <div class="card-header">NAMAZ TƏQVİMİ</div>
-  
-  <div class="card-body text-center">
-    <h6 class="card-title">www.<a href="https://nam.az" class="btn btn-danger" target="_blank">NAM.AZ</a></h6>
-  </div>
-  
-</div>
-
-<hr/>
+<div class="card" id="prayerWidget"></div>
+<br/><br/>
 
 <div class="card">
   <div class="card-header">BİR AYƏ</div>
@@ -46,5 +38,13 @@ if($rnd->translator_id==3){
 
 <div class="card">
   <div class="card-header">BİZƏ QOŞUL</div>
-  
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=10177953140";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+  <div class="fb-page" data-href="https://www.facebook.com/quranaz/" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/quranaz/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/quranaz/">quran.az</a></blockquote></div>
 </div>

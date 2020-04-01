@@ -26,6 +26,8 @@
         "sass-loader": "^8.0.0"
     },
     "dependencies": {
+        "prop-types": "^15.7.2",
+        "react-icons": "^3.9.0",
         "react-js-pagination": "^3.0.3",
         "react-router-dom": "^5.1.2"
     },

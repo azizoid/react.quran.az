@@ -1,15 +1,16 @@
 import React from "react";
+import { FaExternalLinkAlt } from "react-icons/fa";
 
 function SearchAyah({ ayah }) {
     return (
         <tr id={ayah.a}>
-            <td className="text-right">
-                <a href={"/" + ayah.s + "/" + ayah.a}>
-                    {ayah.s + ":" + ayah.a}
+            <td className="text-right">{ayah.s + ":" + ayah.a}</td>
+            <td>{ayah.c} </td>
+            <td>
+                <a href={"/" + ayah.s + "/" + ayah.a + "?t=" + ayah.t}>
+                    <FaExternalLinkAlt />
                 </a>
             </td>
-            <td>{ayah.c} </td>
-            <td>&nbsp;</td>
         </tr>
     );
 }

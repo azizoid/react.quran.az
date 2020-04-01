@@ -4,10 +4,10 @@ class Form extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            s: 0,
-            a: "",
+            s: null,
+            a: null,
             t: 1,
-            q: "",
+            q: null,
             view: "empty"
         };
 
@@ -46,8 +46,8 @@ class Form extends React.Component {
     }
 
     onSearch(event) {
-        event.preventDefault();
         this.props.onSearch(this.state);
+        event.preventDefault();
     }
 
     render() {

@@ -6,6 +6,9 @@ import {
     Route,
     useHistory
 } from "react-router-dom";
+
+import PropTypes from "prop-types";
+
 import Context from "./context";
 import Form from "./Form";
 
@@ -14,21 +17,39 @@ import Soorah from "./pages/Soorah";
 import Ayah from "./pages/Ayah";
 import Search from "./pages/Search";
 
-function App() {
+function App({ location }) {
+    let t = parseInt(new URLSearchParams(window.location.search).get("t"));
+    if (!(t == 1 || t == 2 || t == 3)) t = 1;
+
     const context = useContext(Context);
+    const [form, setForm] = React.useState({ t: t });
+
     let history = useHistory();
 
     const onSearch = form => {
-        console.log(form.view);
+        if (form.s > 0 && form.s < 115) {
+            form.view = "soorah";
+            if (form.a > 0 && form.a < 286) {
+                form.view = "ayah";
+            }
+        } else if (form.q.length > 3) {
+            form.view = "search";
+        } else form.view = "empty";
+        if (!(form.t === 1 || form.t === 2 || form.t === 3)) form.t = 1;
+        setForm(form);
+
         switch (form.view) {
             case "search":
-                history.push("/search/" + form.q);
+                history.push("/search/" + form.q + "?t=" + form.t);
                 break;
             case "soorah":
-                history.push("/" + form.s);
+                history.push("/" + form.s + "?t=" + form.t);
                 break;
             case "ayah":
-                history.push("/" + form.s + "/" + form.a);
+                history.push("/" + form.s + "/" + form.a + "?t=" + form.t);
+                break;
+            case "empty":
+                history.push("/");
                 break;
         }
     };
@@ -36,6 +57,7 @@ function App() {
     return (
         <Context.Provider
             value={{
+                loader: context.loader,
                 soorahList: context.soorahList,
                 translatorList: context.translatorList,
                 onSearch
@@ -46,28 +68,42 @@ function App() {
                     soorahList={context.soorahList}
                     translatorList={context.translatorList}
                     onSearch={onSearch}
+                    form={form}
                 />
 
                 <hr />
 
                 <Switch>
-                    <Route exact path="/">
-                        <Empty />
-                    </Route>
-                    <Route path="/search/:query">
-                        <Search />
-                    </Route>
-                    <Route path="/:soorah/:ayah">
-                        <Ayah />
-                    </Route>
-                    <Route path="/:soorah">
-                        <Soorah />
-                    </Route>
+                    <Route
+                        path="/search/:query"
+                        component={() => <Search t={form.t} />}
+                    />
+                    <Route
+                        exact={true}
+                        path="/:soorah([1-9]|[1-8][0-9]|9[0-9]|10[0-9]|11[0-4])"
+                        component={() => <Soorah soorah="soorah" t={form.t} />}
+                    />
+                    <Route
+                        exact={true}
+                        path="/:soorah([1-9]|[1-8][0-9]|9[0-9]|10[0-9]|11[0-4])/:ayah([1-9]|[1-8][0-9]|9[0-9]|1[0-9]{2}|2[0-7][0-9]|28[0-6])"
+                        component={() => <Ayah t={form.t} />}
+                    />
+
+                    {/* <Route exact={true} path="/" component={() => <Empty />} /> */}
+                    <Empty />
                 </Switch>
             </div>
         </Context.Provider>
     );
 }
+
+App.propTypes = {
+    form: PropTypes.object,
+    s: PropTypes.number,
+    a: PropTypes.number,
+    t: PropTypes.number,
+    q: PropTypes.number
+};
 
 export default App;
 
