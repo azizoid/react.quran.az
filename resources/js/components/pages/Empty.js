@@ -1,6 +1,6 @@
 import React from "react";
 
-function Empty() {
+const Empty = () => {
     return (
         <>
             <div className="clearfix">
@@ -25,27 +25,27 @@ function Empty() {
 
             <div className="clearfix">
                 <h5 className="alert alert-success text-right">
-                    Axtarışınızın <strong>uğurlu</strong> olması üçün aşağıdakı{" "}
+                    Axtarışınızın <strong>uğurlu</strong> olması üçün aşağıdakı
                     <strong>qaydalara</strong> riayət edin
                 </h5>
 
-                <table className="" cellPadding="10">
+                <table cellPadding="10">
                     <tbody>
                         <tr>
                             <td></td>
                             <td>
-                                Saytdan istifadə qaydaları:{" "}
+                                Saytdan istifadə qaydaları:
                                 <code>quran.az/96/1</code>
                             </td>
                         </tr>
                         <tr>
                             <td className="text-right align-top">
-                                Hərf səhvləri:{" "}
+                                Hərf səhvləri:
                             </td>
                             <td>
                                 Axtarış zamanı etdiyiniz qrammatik səhvlər
                                 sözlərin tapılmamasına səbəb ola bilər: <br />
-                                Məsələn: <code>mekke</code> əvəzinə{" "}
+                                Məsələn: <code>mekke</code> əvəzinə
                                 <code>Məkkə</code> sözünü axtarın
                             </td>
                         </tr>
@@ -54,11 +54,10 @@ function Empty() {
                                 Fərqli söz və kəlmələr:
                             </td>
                             <td>
-                                Axtardığınız fikir tərcümədə olmaya bilər:{" "}
-                                <br />
-                                Əlbəttə ki{" "}
-                                <code>namazı necə qılmaq lazımdır</code>
-                                cümləsi tərcümədə rast gəlinmir;
+                                Axtardığınız fikir tərcümədə olmaya bilər:
+                                <br /> Əlbəttə ki
+                                <code>namazı necə qılmaq lazımdır</code> cümləsi
+                                tərcümədə rast gəlinmir;
                             </td>
                         </tr>
                         <tr>
@@ -73,6 +72,6 @@ function Empty() {
             </div>
         </>
     );
-}
+};
 
 export default Empty;

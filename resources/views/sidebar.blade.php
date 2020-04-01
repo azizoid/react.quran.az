@@ -14,7 +14,7 @@ if($rnd->translator_id==3){
 ?>
 
 <div class="card" id="prayerWidget"></div>
-<br/><br/>
+<br/>
 
 <div class="card">
   <div class="card-header">BİR AYƏ</div>

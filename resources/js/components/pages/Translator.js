@@ -1,6 +1,6 @@
 import React from "react";
 
-function Translators({ soorah, translator, ayah, index }) {
+const Translators = ({ soorah, translator, ayah, index }) => {
     return (
         <li className="nav-item">
             <a
@@ -11,6 +11,6 @@ function Translators({ soorah, translator, ayah, index }) {
             </a>
         </li>
     );
-}
+};
 
 export default Translators;

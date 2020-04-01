@@ -4,7 +4,9 @@ import Context from "../context.js";
 import SoorahAyah from "./SoorahAyah";
 import Translator from "./Translator";
 
-function Soorah({ t }) {
+import { TitleComponent } from "../TitleComponent";
+
+const Soorah = ({ t }) => {
     const context = useContext(Context);
 
     const [data, setData] = React.useState([]);
@@ -18,6 +20,7 @@ function Soorah({ t }) {
 
     useEffect(() => {
         console.log(t);
+
         // soorah = parseInt(soorah);
 
         // if (soorah > 0 && soorah < 115)
@@ -36,6 +39,11 @@ function Soorah({ t }) {
 
     return (
         <Context.Provider>
+            <TitleComponent
+                title={
+                    context.soorahList[soorah] + " - Quran.az: Öz Kitabını Oxu"
+                }
+            />
             <div className="row">
                 {empty === 2 ? (
                     <table
@@ -115,6 +123,6 @@ function Soorah({ t }) {
             </div>
         </Context.Provider>
     );
-}
+};
 
 export default Soorah;

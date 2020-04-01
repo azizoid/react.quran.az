@@ -1,7 +1,7 @@
 import React from "react";
 import { FaExternalLinkAlt } from "react-icons/fa";
 
-function SearchAyah({ ayah }) {
+const SearchAyah = ({ ayah }) => {
     return (
         <tr id={ayah.a}>
             <td className="text-right">{ayah.s + ":" + ayah.a}</td>
@@ -13,6 +13,6 @@ function SearchAyah({ ayah }) {
             </td>
         </tr>
     );
-}
+};
 
 export default SearchAyah;

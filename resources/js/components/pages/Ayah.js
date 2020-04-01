@@ -2,9 +2,10 @@ import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Context from "../context.js";
 import Translator from "./Translator";
-import { FaExternalLinkAlt } from "react-icons/fa";
 
-function Ayah({ t }) {
+import { TitleComponent } from "../TitleComponent";
+
+const Ayah = ({ t }) => {
     const context = useContext(Context);
 
     const [data, setData] = React.useState([]);
@@ -44,6 +45,14 @@ function Ayah({ t }) {
 
     return (
         <Context.Provider>
+            <TitleComponent
+                title={
+                    context.soorahList[soorah] +
+                    ":" +
+                    ayah +
+                    " - Quran.az: Öz Kitabını Oxu"
+                }
+            />
             <div className="row">
                 {empty === 2 ? (
                     <table
@@ -200,6 +209,6 @@ function Ayah({ t }) {
             </div>
         </Context.Provider>
     );
-}
+};
 
 export default Ayah;

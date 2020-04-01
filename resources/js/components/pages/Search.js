@@ -5,7 +5,9 @@ import SearchAyah from "./SearchAyah";
 
 import Pagination from "react-js-pagination";
 
-function Search({ t }) {
+import { TitleComponent } from "../TitleComponent";
+
+const Search = ({ t }) => {
     // const context = useContext(Context);
 
     const [data, setData] = React.useState([]);
@@ -42,6 +44,7 @@ function Search({ t }) {
 
     return (
         <Context.Provider>
+            <TitleComponent title={query + " - Quran.az: Öz Kitabını Oxü"} />
             <div className="row">
                 {empty === 2 ? (
                     <table
@@ -116,6 +119,6 @@ function Search({ t }) {
             </div>
         </Context.Provider>
     );
-}
+};
 
 export default Search;

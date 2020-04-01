@@ -17,7 +17,7 @@ import Soorah from "./pages/Soorah";
 import Ayah from "./pages/Ayah";
 import Search from "./pages/Search";
 
-function App({ location }) {
+const App = () => {
     let t = parseInt(new URLSearchParams(window.location.search).get("t"));
     if (!(t == 1 || t == 2 || t == 3)) t = 1;
 
@@ -82,7 +82,7 @@ function App({ location }) {
                         exact={true}
                         path="/:soorah([1-9]|[1-8][0-9]|9[0-9]|10[0-9]|11[0-4])"
                         component={() => <Soorah soorah="soorah" t={form.t} />}
-                    />
+                    ></Route>
                     <Route
                         exact={true}
                         path="/:soorah([1-9]|[1-8][0-9]|9[0-9]|10[0-9]|11[0-4])/:ayah([1-9]|[1-8][0-9]|9[0-9]|1[0-9]{2}|2[0-7][0-9]|28[0-6])"
@@ -95,7 +95,7 @@ function App({ location }) {
             </div>
         </Context.Provider>
     );
-}
+};
 
 App.propTypes = {
     form: PropTypes.object,
