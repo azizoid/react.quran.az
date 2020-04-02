@@ -5,19 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="stylesheet" href="/css/app.css" />
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-WZ9GX3M');</script>
-      <!-- End Google Tag Manager -->
+    <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
   </head>
 
   <body>
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WZ9GX3M"
-      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- Fixed navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a href="/" class="navbar-brand d-flex align-items-center text-muted">
@@ -46,7 +37,7 @@
 
       <article class="col-sm-7"><br/>@yield('content')</article>
 
-      <sidebar class="col-sm-12 col-md-4"><br/>@include('sidebar')</sidebar>
+      <sidebar class="col-sm-12 col-md-4 d-none d-md-block"><br/><div id="sidebar"></div></sidebar>
       
     </div></div>
 
@@ -61,6 +52,17 @@
       </nav>
     </footer>
 
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ mix('js/manifest.js') }}"></script>
+    <script src="{{ mix('js/vendor.js') }}"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70305066-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-70305066-1');
+    </script>
   </body>
 </html>

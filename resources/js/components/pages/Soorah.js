@@ -19,22 +19,15 @@ const Soorah = ({ t }) => {
     let { soorah } = useParams();
 
     useEffect(() => {
-        console.log(t);
-
-        // soorah = parseInt(soorah);
-
-        // if (soorah > 0 && soorah < 115)
-        {
-            fetch("/api/" + soorah + "?t=" + t)
-                .then(response => response.json())
-                .then(v => {
-                    if (v.out.length > 0) {
-                        setEmpty(2);
-                        setOut(v.out);
-                        setData(v.data);
-                    } else setEmpty(1);
-                });
-        } // else setEmpty(1);
+        fetch("/api/" + soorah + "?t=" + t)
+            .then(response => response.json())
+            .then(v => {
+                if (v.out.length > 0) {
+                    setEmpty(2);
+                    setOut(v.out);
+                    setData(v.data);
+                } else setEmpty(1);
+            });
     }, []);
 
     return (

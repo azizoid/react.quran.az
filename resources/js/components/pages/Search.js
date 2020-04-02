@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Context from "../context.js";
 import SearchAyah from "./SearchAyah";
@@ -8,8 +8,6 @@ import Pagination from "react-js-pagination";
 import { TitleComponent } from "../TitleComponent";
 
 const Search = ({ t }) => {
-    // const context = useContext(Context);
-
     const [data, setData] = React.useState([]);
     const [out, setOut] = React.useState([]);
 

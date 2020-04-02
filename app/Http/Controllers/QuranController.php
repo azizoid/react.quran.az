@@ -114,19 +114,25 @@ class QuranController extends Controller
         $trans      =   isset($_GET['t']) && is_numeric($_GET['t']) && in_array($_GET['t'], array(1,2,3)) ? $_GET['t'] : 1;
         $query      =   $out    =   "";
   
+        $data['t'] = $trans;
         if(is_string($q) && strlen($q)>3){ 
             $query  =   $data['q']  = htmlspecialchars($q);
-            $data['t'] = $trans;
+            
 
             $out = Quran::select('id', 'soorah_id as s', 'aya_id as a', 'content as c', 'translator_id as t')
                 ->where("content", "LIKE", "%{$query}%")
                 ->inRandomOrder()
                 ->first();
-
-                if(!empty($out) && $out->count() > 0) {
-                    $data['view'] = "random"; 
-                }else $out = "";
+        }else{
+            $out = Quran::select('id', 'soorah_id as s', 'aya_id as a', 'content as c', 'translator_id as t')
+                ->where("translator_id", $data['t'])
+                ->inRandomOrder()
+                ->first();
         }
+        
+        if(!empty($out) && $out->count() > 0) {
+            $data['view'] = "random"; 
+        }else $out = "";
   
         return response()->json(
             compact('out', 'data') 

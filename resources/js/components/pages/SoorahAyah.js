@@ -3,7 +3,7 @@ import { FaExternalLinkAlt } from "react-icons/fa";
 
 const SoorahAyah = ({ ayah }) => {
     return (
-        <tr id={ayah.a}>
+        <tr>
             <td className="text-right">{ayah.a}</td>
             <td>{ayah.c} </td>
             <td>

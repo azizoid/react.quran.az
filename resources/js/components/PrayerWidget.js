@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
 
 class PrayerWidget extends React.Component {
     constructor(props) {
@@ -73,7 +72,3 @@ class PrayerWidget extends React.Component {
     }
 }
 export default PrayerWidget;
-
-if (document.getElementById("prayerWidget")) {
-    ReactDOM.render(<PrayerWidget />, document.getElementById("prayerWidget"));
-}

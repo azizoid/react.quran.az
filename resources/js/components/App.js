@@ -7,8 +7,6 @@ import {
     useHistory
 } from "react-router-dom";
 
-import PropTypes from "prop-types";
-
 import Context from "./context";
 import Form from "./Form";
 
@@ -74,6 +72,7 @@ const App = () => {
                 <hr />
 
                 <Switch>
+                    <Route exact={true} path="/" component={() => <Empty />} />
                     <Route
                         path="/search/:query"
                         component={() => <Search t={form.t} />}
@@ -88,21 +87,11 @@ const App = () => {
                         path="/:soorah([1-9]|[1-8][0-9]|9[0-9]|10[0-9]|11[0-4])/:ayah([1-9]|[1-8][0-9]|9[0-9]|1[0-9]{2}|2[0-7][0-9]|28[0-6])"
                         component={() => <Ayah t={form.t} />}
                     />
-
-                    {/* <Route exact={true} path="/" component={() => <Empty />} /> */}
                     <Empty />
                 </Switch>
             </div>
         </Context.Provider>
     );
-};
-
-App.propTypes = {
-    form: PropTypes.object,
-    s: PropTypes.number,
-    a: PropTypes.number,
-    t: PropTypes.number,
-    q: PropTypes.number
 };
 
 export default App;
