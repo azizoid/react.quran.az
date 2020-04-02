@@ -12,7 +12,7 @@ const mix = require("laravel-mix");
  */
 
 mix.react("resources/js/app.js", "public/js")
-    .extract(["jquery", "lodash", "popper.js", "bootstrap"])
+    .extract(["jquery", "lodash", "popper.js", "bootstrap", "react-facebook"])
     .sass("resources/sass/app.scss", "public/css")
     .options({ purifyCss: false })
     .disableNotifications();
