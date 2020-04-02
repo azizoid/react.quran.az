@@ -15,5 +15,8 @@ mix.react("resources/js/app.js", "public/js")
     .extract(["jquery", "lodash", "popper.js", "bootstrap"])
     .sass("resources/sass/app.scss", "public/css")
     .options({ purifyCss: false })
-    .disableNotifications()
-    .version();
+    .disableNotifications();
+
+if (mix.inProduction()) {
+    mix.version();
+}
