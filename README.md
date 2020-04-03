@@ -1,6 +1,8 @@
-Quran.az is an educational project, giving access to Holy Book.
+Quran.az is an educational project.
 
 The project is oriented to Azerbaijan and have been used 3 translations popular in that country.
+
+And makes accessible a search system by verses. 
 
 It gives access to the verses by adding the numbers to the url 
     
@@ -12,5 +14,6 @@ First project was written in PHP, then Moved to Laravel
 
 This version is a mashup ReactJS + Laravel.
 
-Backend is made on Laravel, it generates API, which is being accessed by ReactJS.
+Backend is made on Laravel, it generates API.
 
+Frontend is built on ReactJS + Bootstrap
