@@ -1,4 +1,4 @@
-Quran.az os an educational project, giving access to Holy Book.
+Quran.az is an educational project, giving access to Holy Book.
 
 The project is oriented to Azerbaijan and have been used 3 translations popular in that country.
 
