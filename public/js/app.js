@@ -43922,7 +43922,7 @@ var FacebookPage = function FacebookPage() {
     className: "card"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "card-header"
-  }, "B\u0130Z\u018F QO\u015EUL"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_facebook__WEBPACK_IMPORTED_MODULE_1__["FacebookProvider"], {
+  }, "B\u0130Z\u0130 B\u018FY\u018FND\u0130N\u0130Z M\u0130?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_facebook__WEBPACK_IMPORTED_MODULE_1__["FacebookProvider"], {
     appId: "10177953140"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_facebook__WEBPACK_IMPORTED_MODULE_1__["Page"], {
     href: "https://www.facebook.com/quranaz/",

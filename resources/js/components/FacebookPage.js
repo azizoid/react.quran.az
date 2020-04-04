@@ -4,7 +4,7 @@ import { FacebookProvider, Page } from "react-facebook";
 const FacebookPage = () => {
     return (
         <div className="card">
-            <div className="card-header">BİZƏ QOŞUL</div>
+            <div className="card-header">BİZİ BƏYƏNDİNİZ Mİ?</div>
             <FacebookProvider appId="10177953140">
                 <Page href="https://www.facebook.com/quranaz/" tabs="none" />
             </FacebookProvider>
