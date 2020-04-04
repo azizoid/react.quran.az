@@ -17,3 +17,11 @@ This version is a mashup ReactJS + Laravel.
 Backend is made on Laravel, it generates API.
 
 Frontend is built on ReactJS + Bootstrap
+
+
+[ Installation ]
+
+    composer update
+    npm install
+    npm run dev (or npm run prod for production)
+    php artisan migrate
