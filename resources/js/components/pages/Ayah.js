@@ -21,21 +21,18 @@ const Ayah = ({ t }) => {
         soorah = parseInt(soorah);
         ayah = parseInt(ayah);
 
-        // if (soorah > 0 && soorah < 115 && ayah > 0 && ayah < 287)
-        {
-            fetch("/api/" + soorah + "/" + ayah + "?t=" + t)
-                .then(response => response.json())
-                .then(v => {
-                    if (v.out.length > 0) {
-                        setOut(v.out);
-                        setData(v.data);
-                        setDetail(v.detail);
-                        setNav(v.nav);
+        fetch("/api/" + soorah + "/" + ayah + "?t=" + t)
+            .then(response => response.json())
+            .then(v => {
+                if (v.out.length > 0) {
+                    setOut(v.out);
+                    setData(v.data);
+                    setDetail(v.detail);
+                    setNav(v.nav);
 
-                        setEmpty(2);
-                    } else setEmpty(1);
-                });
-        } //else setEmpty(1);
+                    setEmpty(2);
+                } else setEmpty(1);
+            });
 
         return function cleanup() {
             setOut({});
@@ -61,7 +58,7 @@ const Ayah = ({ t }) => {
                     >
                         <thead>
                             <tr>
-                                <td colSpan="3">
+                                <td>
                                     <ul className="nav nav-pills nav-fill">
                                         <li className="nav-item">
                                             <a
@@ -90,40 +87,30 @@ const Ayah = ({ t }) => {
                         </thead>
 
                         <tbody>
-                            {out.s == 9 && out.a == 1 ? (
-                                <tr>
-                                    <td colSpan="3">&nbsp;</td>
-                                </tr>
-                            ) : (
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>
-                                        <h2 className="text-center">
-                                            بِسْمِ اللَّهِ الرَّحْمَٰنِ
-                                            الرَّحِيمِ
-                                        </h2>
-                                    </td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                            )}
+                            <tr>
+                                <td>
+                                    <h2 className="text-center">
+                                        بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+                                    </h2>
+                                </td>
+                            </tr>
 
-                            {out.map(ayah => {
+                            {out.map(({ id, s, a, c }) => {
                                 return (
-                                    <tr key={ayah.id}>
-                                        <td>{ayah.a}</td>
-                                        <td>
-                                            <div className="ayaText">
-                                                {ayah.c}
-                                            </div>
+                                    <tr key={id}>
+                                        <td style={{ textAlign: "justify" }}>
+                                            <strong>{s + ":" + a}</strong>
+                                            <br />
+                                            {c}
                                         </td>
                                     </tr>
                                 );
                             })}
                             <tr>
-                                <td colSpan="3">{detail.transliteration}</td>
+                                <td>{detail.transliteration}</td>
                             </tr>
                             <tr>
-                                <td colSpan="3">
+                                <td>
                                     <h2 className="text-right arabic">
                                         <article> {detail.content} </article>
                                     </h2>
@@ -132,14 +119,14 @@ const Ayah = ({ t }) => {
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colSpan="2">
+                                <td>
                                     <ul className="pagination justify-content-center">
                                         <li className="page-item disabled">
                                             <span className="page-link">
                                                 Digər ayələr
                                             </span>
                                         </li>
-                                        {nav.prev != null ? (
+                                        {nav.prev != null && (
                                             <li className="page-item">
                                                 <a
                                                     href={
@@ -153,15 +140,13 @@ const Ayah = ({ t }) => {
                                                     {nav.prev}
                                                 </a>
                                             </li>
-                                        ) : (
-                                            <li>&nbsp;</li>
                                         )}
                                         <li className="page-item disabled">
                                             <a href="#" className="page-link">
                                                 {data.a}
                                             </a>
                                         </li>
-                                        {nav.next != null ? (
+                                        {nav.next != null && (
                                             <li className="page-item">
                                                 <a
                                                     href={
@@ -175,8 +160,6 @@ const Ayah = ({ t }) => {
                                                     {nav.next}
                                                 </a>
                                             </li>
-                                        ) : (
-                                            <li>&nbsp;</li>
                                         )}
                                     </ul>
                                 </td>

@@ -107,11 +107,12 @@ class QuranController extends Controller
          );
     }
 
-    public function random($q=null)
+    public function random($limit=1, $q=null)
     {
         $data       =   ['s'=>null, 'a'=>null, 'q'=>null, 't'=>1, 'view'=>'empty'];
         $view       =   "search";
         $trans      =   isset($_GET['t']) && is_numeric($_GET['t']) && in_array($_GET['t'], array(1,2,3)) ? $_GET['t'] : 1;
+        $limit      =   is_numeric($limit) && $limit==1 ? 1 : $limit;
         $query      =   $out    =   "";
   
         $data['t'] = $trans;
@@ -121,8 +122,9 @@ class QuranController extends Controller
 
             $out = Quran::select('id', 'soorah_id as s', 'aya_id as a', 'content as c', 'translator_id as t')
                 ->where("content", "LIKE", "%{$query}%")
+                ->where("translator_id", $data['t'])
                 ->inRandomOrder()
-                ->first();
+                ->limit($limit)->get();
         }else{
             $out = Quran::select('id', 'soorah_id as s', 'aya_id as a', 'content as c', 'translator_id as t')
                 ->where("translator_id", $data['t'])

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import ReactDOM from "react-dom";
 import {
     BrowserRouter as Router,
@@ -20,7 +20,7 @@ const App = () => {
     if (!(t == 1 || t == 2 || t == 3)) t = 1;
 
     const context = useContext(Context);
-    const [form, setForm] = React.useState({ t: t });
+    const [form, setForm] = useState({ t: t });
 
     let history = useHistory();
 
@@ -65,8 +65,7 @@ const App = () => {
                 <Form
                     soorahList={context.soorahList}
                     translatorList={context.translatorList}
-                    onSearch={onSearch}
-                    form={form}
+                    onSubmit={onSearch}
                 />
 
                 <hr />
@@ -80,7 +79,7 @@ const App = () => {
                     <Route
                         exact={true}
                         path="/:soorah([1-9]|[1-8][0-9]|9[0-9]|10[0-9]|11[0-4])"
-                        component={() => <Soorah soorah="soorah" t={form.t} />}
+                        component={() => <Soorah t={form.t} />}
                     ></Route>
                     <Route
                         exact={true}

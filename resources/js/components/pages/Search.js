@@ -51,7 +51,7 @@ const Search = ({ t }) => {
                     >
                         <thead>
                             <tr>
-                                <td colSpan="2">
+                                <td colSpan="3">
                                     <Pagination
                                         activePage={parseInt(data.current_page)}
                                         itemsCountPerPage={parseInt(
@@ -74,7 +74,7 @@ const Search = ({ t }) => {
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colSpan="2">
+                                <td colSpan="3">
                                     <Pagination
                                         activePage={parseInt(data.current_page)}
                                         itemsCountPerPage={parseInt(
