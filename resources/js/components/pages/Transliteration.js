@@ -15,8 +15,6 @@ const Transliteration = ({ content }) => {
 
     let text = content.split(" ");
 
-    console.log(text);
-
     return text.map((word, index) => {
         const rand = Math.floor(Math.random() * colors.length);
         const randomColor = colors[rand];

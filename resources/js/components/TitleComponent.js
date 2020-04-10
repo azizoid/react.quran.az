@@ -7,7 +7,16 @@ const TitleComponent = ({ title, description }) => {
     return (
         <Helmet>
             <title>{title ? title : defaultTitle}</title>
-            <meta name="description" content={defaultDescription}></meta>
+            <meta
+                name="description"
+                content={description + " | " + defaultDescription}
+            />
+
+            <meta property="og:title" content={title ? title : defaultTitle} />
+            <meta
+                property="og:description"
+                content={description || defaultDescription}
+            />
         </Helmet>
     );
 };

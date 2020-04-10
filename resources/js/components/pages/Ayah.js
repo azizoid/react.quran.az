@@ -41,16 +41,10 @@ const Ayah = ({ t }) => {
         };
     }, [soorah, ayah]);
 
+    let description = "";
+
     return (
         <Context.Provider>
-            <TitleComponent
-                title={
-                    context.soorahList[soorah] +
-                    ":" +
-                    ayah +
-                    " - Quran.az: Öz Kitabını Oxu"
-                }
-            />
             <div className="row">
                 {empty === 2 ? (
                     <table
@@ -102,7 +96,7 @@ const Ayah = ({ t }) => {
                                         <td style={{ textAlign: "justify" }}>
                                             <strong>{s + ":" + a}</strong>
                                             <br />
-                                            {c}
+                                            {(description = c)}
                                         </td>
                                     </tr>
                                 );
@@ -195,6 +189,15 @@ const Ayah = ({ t }) => {
                     </div>
                 )}
             </div>
+            <TitleComponent
+                title={
+                    context.soorahList[soorah] +
+                    ":" +
+                    ayah +
+                    " - Quran.az: Öz Kitabını Oxu"
+                }
+                description={description}
+            />
         </Context.Provider>
     );
 };

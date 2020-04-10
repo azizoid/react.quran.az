@@ -9,6 +9,12 @@
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="/img/kuran-logo.svg" />
 
+    <meta name="description" content="Quran.az - Öz Kitabını Oxu"/>
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="{{ URL::current() }}" />
+    <meta property="og:image" content="https://quran.az/img/kuran.jpg" />
+    <meta property="og:description" content="Quran.az - Öz Kitabını Oxu"/>
+    <meta property="og:title" content="Quran.az - Öz Kitabını Oxu"/>
   </head>
 
   <body>
