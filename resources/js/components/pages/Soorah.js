@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Context from "../context.js";
 import SoorahAyah from "./SoorahAyah";
@@ -9,14 +9,14 @@ import { TitleComponent } from "../TitleComponent";
 const Soorah = ({ t }) => {
     const context = useContext(Context);
 
-    const [data, setData] = React.useState([]);
-    const [out, setOut] = React.useState([]);
-    const [empty, setEmpty] = React.useState(0);
+    const [data, setData] = useState([]);
+    const [out, setOut] = useState([]);
+    const [empty, setEmpty] = useState(0);
     //empty - 0 start
     //empty - 1 returned empty
     //empty - 2 returned results
-
     let { soorah } = useParams();
+    // const [soorah, setSoorah] = useState(soorah);
 
     useEffect(() => {
         fetch("/api/" + soorah + "?t=" + t)
@@ -28,7 +28,7 @@ const Soorah = ({ t }) => {
                     setData(v.data);
                 } else setEmpty(1);
             });
-    }, []);
+    }, [soorah]);
 
     return (
         <Context.Provider>

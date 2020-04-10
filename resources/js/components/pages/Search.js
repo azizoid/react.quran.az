@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Context from "../context.js";
 import SearchAyah from "./SearchAyah";
@@ -8,10 +8,9 @@ import Pagination from "react-js-pagination";
 import { TitleComponent } from "../TitleComponent";
 
 const Search = ({ t }) => {
-    const [data, setData] = React.useState([]);
-    const [out, setOut] = React.useState([]);
-
-    const [empty, setEmpty] = React.useState(0);
+    const [data, setData] = useState([]);
+    const [out, setOut] = useState([]);
+    const [empty, setEmpty] = useState(0);
 
     let { query } = useParams();
 
@@ -27,7 +26,7 @@ const Search = ({ t }) => {
                     } else setEmpty(1);
                 });
         }
-    }, []);
+    }, [query]);
 
     const getData = v => {
         fetch("/api/search/" + query + "?page=" + v + "&t=" + t)
@@ -69,7 +68,13 @@ const Search = ({ t }) => {
                         </thead>
                         <tbody>
                             {out.map(ayah => {
-                                return <SearchAyah ayah={ayah} key={ayah.id} />;
+                                return (
+                                    <SearchAyah
+                                        ayah={ayah}
+                                        key={ayah.id}
+                                        mark={query}
+                                    />
+                                );
                             })}
                         </tbody>
                         <tfoot>

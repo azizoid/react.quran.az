@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Context from "../context.js";
 import Translator from "./Translator";
+import Transliteration from "./Transliteration";
 
 import { TitleComponent } from "../TitleComponent";
 
@@ -38,7 +39,7 @@ const Ayah = ({ t }) => {
             setOut({});
             setData({});
         };
-    }, []);
+    }, [soorah, ayah]);
 
     return (
         <Context.Provider>
@@ -107,7 +108,11 @@ const Ayah = ({ t }) => {
                                 );
                             })}
                             <tr>
-                                <td>{detail.transliteration}</td>
+                                <td>
+                                    <Transliteration
+                                        content={detail.transliteration}
+                                    />
+                                </td>
                             </tr>
                             <tr>
                                 <td>
