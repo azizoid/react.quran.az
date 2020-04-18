@@ -1,8 +1,6 @@
 import React from "react";
 
 const Context = React.createContext({
-    loader: true,
-    empty: true,
     translatorList: [
         ,
         "Əlixan Musayev",

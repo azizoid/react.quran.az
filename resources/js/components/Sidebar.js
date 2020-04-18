@@ -7,13 +7,13 @@ import FacebookPage from "./FacebookPage";
 
 const Sidebar = () => {
     return (
-        <>
+        <div style={{ fontSize: "0.9rem" }}>
             <PrayerWidget />
             <br />
             <RandomAyah />
             <hr />
             <FacebookPage />
-        </>
+        </div>
     );
 };
 export default Sidebar;

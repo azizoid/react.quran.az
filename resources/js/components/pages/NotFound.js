@@ -1,6 +1,6 @@
 import React from "react";
 
-const Empty = () => {
+const NotFound = () => {
     return (
         <>
             <div className="clearfix">
@@ -24,7 +24,7 @@ const Empty = () => {
             </div>
 
             <div className="clearfix">
-                <h6 className="alert alert-success text-right">
+                <h6 className="alert alert-danger text-right">
                     Axtarışınızın <strong>uğurlu</strong> olması üçün aşağıdakı
                     <strong>qaydalara</strong> riayət edin
                 </h6>
@@ -76,4 +76,4 @@ const Empty = () => {
     );
 };
 
-export default Empty;
+export default NotFound;

@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import Context from "../context.js";
 import SearchAyah from "./SearchAyah";
+import Loader from "./Loader";
 
 import Pagination from "react-js-pagination";
 
 import { TitleComponent } from "../TitleComponent";
 
-const Search = ({ t }) => {
+const Search = ({ query, t }) => {
     const [data, setData] = useState([]);
     const [out, setOut] = useState([]);
     const [empty, setEmpty] = useState(0);
-
-    let { query } = useParams();
 
     useEffect(() => {
         if (query.length > 2) {
@@ -40,7 +37,7 @@ const Search = ({ t }) => {
     };
 
     return (
-        <Context.Provider>
+        <>
             <TitleComponent title={query + " - Quran.az: Öz Kitabını Oxü"} />
             <div className="row">
                 {empty === 2 ? (
@@ -103,24 +100,12 @@ const Search = ({ t }) => {
                                 Kəlmə tapılmamışdır
                             </div>
                         ) : (
-                            <div className="text-center">
-                                <div className="lds-grid">
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                </div>
-                            </div>
+                            <Loader />
                         )}
                     </div>
                 )}
             </div>
-        </Context.Provider>
+        </>
     );
 };
 
