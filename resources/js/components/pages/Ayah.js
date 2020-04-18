@@ -1,28 +1,24 @@
-import React, { useContext, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import Context from "../context.js";
-import Translator from "./Translator";
-import Transliteration from "./Transliteration";
+import React, { useEffect, useState } from "react";
+
+import TranslatorList from "./TranslatorList";
+import ColoredText from "./ColoredText";
+import Loader from "./Loader";
 
 import { TitleComponent } from "../TitleComponent";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
-const Ayah = ({ t }) => {
-    const context = useContext(Context);
+const Ayah = ({ soorah, ayah, t, soorahTitle, translatorList }) => {
+    const [data, setData] = useState([]);
+    const [out, setOut] = useState([]);
+    const [detail, setDetail] = useState([]);
+    const [nav, setNav] = useState([]);
 
-    const [data, setData] = React.useState([]);
-    const [out, setOut] = React.useState([]);
-    const [detail, setDetail] = React.useState([]);
-    const [nav, setNav] = React.useState([]);
-
-    const [empty, setEmpty] = React.useState(0);
-
-    let { soorah, ayah } = useParams();
+    const [empty, setEmpty] = useState(0);
 
     useEffect(() => {
-        soorah = parseInt(soorah);
-        ayah = parseInt(ayah);
+        const url = "/" + soorah + "/" + ayah + "?t=" + t;
 
-        fetch("/api/" + soorah + "/" + ayah + "?t=" + t)
+        fetch("/api" + url)
             .then(response => response.json())
             .then(v => {
                 if (v.out.length > 0) {
@@ -32,6 +28,8 @@ const Ayah = ({ t }) => {
                     setNav(v.nav);
 
                     setEmpty(2);
+
+                    localStorage.setItem("lastAyah", url);
                 } else setEmpty(1);
             });
 
@@ -39,91 +37,121 @@ const Ayah = ({ t }) => {
             setOut({});
             setData({});
         };
-    }, [soorah, ayah]);
+    }, [soorah, ayah, t]);
 
     let description = "";
 
     return (
-        <Context.Provider>
+        <>
             <div className="row">
                 {empty === 2 ? (
-                    <table
-                        id="quran-ayah"
-                        className="table table-striped table-borderless"
-                    >
+                    <table id="quran-ayah" className="table table-borderless">
                         <thead>
                             <tr>
-                                <td>
-                                    <ul className="nav nav-pills nav-fill">
-                                        <li className="nav-item">
-                                            <a
-                                                href={"/" + data.s}
-                                                className="nav-link active"
-                                            >
-                                                {context.soorahList[data.s]}
-                                            </a>
-                                        </li>
-                                        {context.translatorList.map(
-                                            (translator, index) => {
-                                                return (
-                                                    <Translator
-                                                        translator={translator}
-                                                        index={index}
-                                                        soorah={data.s}
-                                                        ayah={data.a}
-                                                        key={index}
-                                                    />
-                                                );
-                                            }
-                                        )}
-                                    </ul>
+                                <td colSpan="3">
+                                    <TranslatorList
+                                        data={data}
+                                        soorahTitle={soorahTitle}
+                                    />
                                 </td>
                             </tr>
                         </thead>
 
                         <tbody>
                             <tr>
-                                <td>
-                                    <h2 className="text-center">
+                                <td colSpan="3">
+                                    <h3 className="text-center">
                                         بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
-                                    </h2>
+                                    </h3>
                                 </td>
                             </tr>
 
                             {out.map(({ id, s, a, c }) => {
                                 return (
                                     <tr key={id}>
+                                        <td
+                                            width="1"
+                                            className="nav-icon align-middle"
+                                        >
+                                            {nav.prev != null && (
+                                                <a
+                                                    href={
+                                                        "/" +
+                                                        data.s +
+                                                        "/" +
+                                                        nav.prev +
+                                                        "?t=" +
+                                                        t
+                                                    }
+                                                    style={{
+                                                        fontSize: "3em",
+                                                        color: "#6cb2eb"
+                                                    }}
+                                                >
+                                                    <FaChevronLeft />
+                                                </a>
+                                            )}
+                                        </td>
                                         <td style={{ textAlign: "justify" }}>
                                             <strong>{s + ":" + a}</strong>
                                             <br />
                                             {(description = c)}
                                         </td>
+                                        <td
+                                            width="1"
+                                            className="nav-icon align-middle"
+                                        >
+                                            {nav.next != null && (
+                                                <a
+                                                    href={
+                                                        "/" +
+                                                        data.s +
+                                                        "/" +
+                                                        nav.next +
+                                                        "?t=" +
+                                                        t
+                                                    }
+                                                    style={{
+                                                        fontSize: "3em",
+                                                        color: "#6cb2eb"
+                                                    }}
+                                                >
+                                                    <FaChevronRight />
+                                                </a>
+                                            )}
+                                        </td>
                                     </tr>
                                 );
                             })}
                             <tr>
+                                <td></td>
                                 <td>
-                                    <Transliteration
+                                    <ColoredText
+                                        key="transliteration"
                                         content={detail.transliteration}
                                     />
                                 </td>
+                                <td></td>
                             </tr>
                             <tr>
-                                <td>
+                                <td colSpan="3">
                                     <h2 className="text-right arabic">
-                                        <article> {detail.content} </article>
+                                        {detail.content}
                                     </h2>
                                 </td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td>
+                                <td colSpan="3">
                                     <ul className="pagination justify-content-center">
-                                        <li className="page-item disabled">
-                                            <span className="page-link">
-                                                Digər ayələr
-                                            </span>
+                                        <li className="page-item">
+                                            <a
+                                                href={"/" + data.s + "?t=" + t}
+                                                className="page-link"
+                                            >
+                                                Surəni tam oxu
+                                            </a>
                                         </li>
                                         {nav.prev != null && (
                                             <li className="page-item">
@@ -132,7 +160,9 @@ const Ayah = ({ t }) => {
                                                         "/" +
                                                         data.s +
                                                         "/" +
-                                                        nav.prev
+                                                        nav.prev +
+                                                        "?t=" +
+                                                        t
                                                     }
                                                     className="page-link"
                                                 >
@@ -152,7 +182,9 @@ const Ayah = ({ t }) => {
                                                         "/" +
                                                         data.s +
                                                         "/" +
-                                                        nav.next
+                                                        nav.next +
+                                                        "?t=" +
+                                                        t
                                                     }
                                                     className="page-link"
                                                 >
@@ -172,33 +204,18 @@ const Ayah = ({ t }) => {
                                 Ayə tapılmamışdır
                             </div>
                         ) : (
-                            <div className="text-center">
-                                <div className="lds-grid">
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                </div>
-                            </div>
+                            <Loader />
                         )}
                     </div>
                 )}
             </div>
             <TitleComponent
                 title={
-                    context.soorahList[soorah] +
-                    ":" +
-                    ayah +
-                    " - Quran.az: Öz Kitabını Oxu"
+                    soorahTitle + ":" + ayah + " - Quran.az: Öz Kitabını Oxu"
                 }
                 description={description}
             />
-        </Context.Provider>
+        </>
     );
 };
 

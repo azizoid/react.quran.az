@@ -1,15 +1,13 @@
 import React from "react";
 
-const Translators = ({ soorah, translator, ayah, index }) => {
+const Translators = ({ soorah, title, ayah, index }) => {
     return (
-        <li className="nav-item">
-            <a
-                href={"/" + soorah + (ayah ? "/" + ayah : "") + "?t=" + index}
-                className="nav-link"
-            >
-                {translator}
-            </a>
-        </li>
+        <a
+            className="dropdown-item"
+            href={"/" + soorah + (ayah ? "/" + ayah : "") + "?t=" + index}
+        >
+            {title}
+        </a>
     );
 };
 

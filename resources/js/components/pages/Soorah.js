@@ -1,22 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import Context from "../context.js";
+import React, { useEffect, useState } from "react";
 import SoorahAyah from "./SoorahAyah";
-import Translator from "./Translator";
+import TranslatorList from "./TranslatorList";
+import Loader from "./Loader";
 
 import { TitleComponent } from "../TitleComponent";
 
-const Soorah = ({ t }) => {
-    const context = useContext(Context);
-
+const Soorah = ({ soorah, t, soorahTitle, translatorList }) => {
     const [data, setData] = useState([]);
     const [out, setOut] = useState([]);
     const [empty, setEmpty] = useState(0);
     //empty - 0 start
     //empty - 1 returned empty
     //empty - 2 returned results
-    let { soorah } = useParams();
-    // const [soorah, setSoorah] = useState(soorah);
 
     useEffect(() => {
         fetch("/api/" + soorah + "?t=" + t)
@@ -31,11 +26,9 @@ const Soorah = ({ t }) => {
     }, [soorah]);
 
     return (
-        <Context.Provider>
+        <>
             <TitleComponent
-                title={
-                    context.soorahList[soorah] + " - Quran.az: Öz Kitabını Oxu"
-                }
+                title={soorahTitle + " - Quran.az: Öz Kitabını Oxu"}
             />
             <div className="row">
                 {empty === 2 ? (
@@ -46,43 +39,24 @@ const Soorah = ({ t }) => {
                         <thead>
                             <tr>
                                 <td colSpan="3">
-                                    <ul className="nav nav-pills nav-fill">
-                                        <li className="nav-item">
-                                            <span className="nav-link active">
-                                                {context.soorahList[data.s]}
-                                            </span>
-                                        </li>
-                                        {context.translatorList.map(
-                                            (translator, index) => {
-                                                return (
-                                                    <Translator
-                                                        translator={translator}
-                                                        index={index}
-                                                        soorah={data.s}
-                                                        key={index}
-                                                    />
-                                                );
-                                            }
-                                        )}
-                                    </ul>
+                                    <TranslatorList
+                                        data={data}
+                                        soorahTitle={soorahTitle}
+                                    />
                                 </td>
                             </tr>
                         </thead>
                         <tbody>
-                            {data.s != 9 ? (
+                            {data.s != 9 && (
                                 <tr>
                                     <td>&nbsp;</td>
                                     <td>
-                                        <h2 className="text-center">
+                                        <h3 className="text-center">
                                             بِسْمِ اللَّهِ الرَّحْمَٰنِ
                                             الرَّحِيمِ
-                                        </h2>
+                                        </h3>
                                     </td>
                                     <td>&nbsp;</td>
-                                </tr>
-                            ) : (
-                                <tr>
-                                    <td colSpan="3">&nbsp;</td>
                                 </tr>
                             )}
                             {out.map(ayah => {
@@ -97,24 +71,12 @@ const Soorah = ({ t }) => {
                                 Surə tapılmamışdır
                             </div>
                         ) : (
-                            <div className="text-center">
-                                <div className="lds-grid">
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                </div>
-                            </div>
+                            <Loader />
                         )}
                     </div>
                 )}
             </div>
-        </Context.Provider>
+        </>
     );
 };
 

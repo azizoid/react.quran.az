@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
 
-const Transliteration = ({ content }) => {
+const ColoredText = ({ content }) => {
     let colors = [
         "#3490dc",
         "#6574cd",
         "#9561e2",
         "#f66d9b",
-        "#e3342f",
         "#f6993f",
         "#38c172",
         "#4dc0b5",
@@ -14,10 +13,10 @@ const Transliteration = ({ content }) => {
     ];
 
     let text = content.split(" ");
+    useEffect(() => {}, []);
 
     return text.map((word, index) => {
-        const rand = Math.floor(Math.random() * colors.length);
-        const randomColor = colors[rand];
+        const randomColor = colors[_.random(1, colors.length)];
         return (
             <span style={{ color: randomColor }} key={index}>
                 {word + " "}
@@ -26,4 +25,4 @@ const Transliteration = ({ content }) => {
     });
 };
 
-export default Transliteration;
+export default ColoredText;
