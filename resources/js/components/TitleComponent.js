@@ -1,5 +1,5 @@
 import React from "react";
-import Helmet from "react-helmet";
+import { Helmet } from "react-helmet";
 
 const TitleComponent = ({ title, description }) => {
     var defaultTitle = "Quran.az - Öz Kitabını Oxu";

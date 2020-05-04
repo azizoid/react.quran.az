@@ -60,7 +60,7 @@ const Ayah = ({ soorah, ayah, t, soorahTitle }) => {
             return { ...prev, s: Number(s), a: Number(a), t: Number(tr) };
         });
         history.push("/" + s + "/" + a + "?t=" + tr);
-        // console.log(form);
+        console.log(form);
         e.preventDefault();
     };
 
@@ -77,6 +77,7 @@ const Ayah = ({ soorah, ayah, t, soorahTitle }) => {
                                     <TranslatorList
                                         data={data}
                                         soorahTitle={soorahTitle}
+                                        navClick={navClick}
                                     />
                                 </td>
                             </tr>
@@ -85,9 +86,7 @@ const Ayah = ({ soorah, ayah, t, soorahTitle }) => {
                         <tbody>
                             <tr>
                                 <td colSpan="3">
-                                    <h3 className="text-center">
-                                        بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
-                                    </h3>
+                                    <h3 className="text-center">&#65021;</h3>
                                 </td>
                             </tr>
 
@@ -99,8 +98,16 @@ const Ayah = ({ soorah, ayah, t, soorahTitle }) => {
                                             className="nav-icon align-middle"
                                         >
                                             {nav.prev != null && (
-                                                <Link
-                                                    to={
+                                                <a
+                                                    onClick={e =>
+                                                        navClick(
+                                                            e,
+                                                            data.s,
+                                                            nav.prev,
+                                                            t
+                                                        )
+                                                    }
+                                                    href={
                                                         "/" +
                                                         data.s +
                                                         "/" +
@@ -114,7 +121,7 @@ const Ayah = ({ soorah, ayah, t, soorahTitle }) => {
                                                     }}
                                                 >
                                                     <FaChevronLeft />
-                                                </Link>
+                                                </a>
                                             )}
                                         </td>
                                         <td style={{ textAlign: "justify" }}>
@@ -127,8 +134,16 @@ const Ayah = ({ soorah, ayah, t, soorahTitle }) => {
                                             className="nav-icon align-middle"
                                         >
                                             {nav.next != null && (
-                                                <Link
-                                                    to={
+                                                <a
+                                                    onClick={e =>
+                                                        navClick(
+                                                            e,
+                                                            data.s,
+                                                            nav.next,
+                                                            t
+                                                        )
+                                                    }
+                                                    href={
                                                         "/" +
                                                         data.s +
                                                         "/" +
@@ -142,7 +157,7 @@ const Ayah = ({ soorah, ayah, t, soorahTitle }) => {
                                                     }}
                                                 >
                                                     <FaChevronRight />
-                                                </Link>
+                                                </a>
                                             )}
                                         </td>
                                     </tr>
@@ -180,8 +195,16 @@ const Ayah = ({ soorah, ayah, t, soorahTitle }) => {
                                         </li>
                                         {nav.prev != null && (
                                             <li className="page-item">
-                                                <Link
-                                                    to={
+                                                <a
+                                                    onClick={e =>
+                                                        navClick(
+                                                            e,
+                                                            data.s,
+                                                            nav.prev,
+                                                            t
+                                                        )
+                                                    }
+                                                    href={
                                                         "/" +
                                                         data.s +
                                                         "/" +
@@ -192,7 +215,7 @@ const Ayah = ({ soorah, ayah, t, soorahTitle }) => {
                                                     className="page-link"
                                                 >
                                                     {nav.prev}
-                                                </Link>
+                                                </a>
                                             </li>
                                         )}
                                         <li className="page-item disabled">
@@ -202,8 +225,16 @@ const Ayah = ({ soorah, ayah, t, soorahTitle }) => {
                                         </li>
                                         {nav.next != null && (
                                             <li className="page-item">
-                                                <Link
-                                                    to={
+                                                <a
+                                                    onClick={e =>
+                                                        navClick(
+                                                            e,
+                                                            data.s,
+                                                            nav.next,
+                                                            t
+                                                        )
+                                                    }
+                                                    href={
                                                         "/" +
                                                         data.s +
                                                         "/" +
@@ -214,7 +245,7 @@ const Ayah = ({ soorah, ayah, t, soorahTitle }) => {
                                                     className="page-link"
                                                 >
                                                     {nav.next}
-                                                </Link>
+                                                </a>
                                             </li>
                                         )}
                                     </ul>

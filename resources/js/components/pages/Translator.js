@@ -1,13 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const Translators = ({ soorah, title, ayah, index }) => {
+const Translators = ({ url, title }) => {
     return (
-        <a
-            className="dropdown-item"
-            href={"/" + soorah + (ayah ? "/" + ayah : "") + "?t=" + index}
-        >
+        <Link className="dropdown-item" to={url}>
             {title}
-        </a>
+        </Link>
     );
 };
 

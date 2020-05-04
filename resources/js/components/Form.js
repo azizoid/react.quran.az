@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const Form = ({ soorahList, translatorList, onSubmit, formOld }) => {
+const Form = ({ soorahList, translatorList, onSubmit }) => {
     const [form, setForm] = useState({
         s: 0,
         a: "",
@@ -42,6 +42,7 @@ const Form = ({ soorahList, translatorList, onSubmit, formOld }) => {
 
     const onSearch = event => {
         event.preventDefault();
+        // console.log(form);
         onSubmit(form);
     };
 

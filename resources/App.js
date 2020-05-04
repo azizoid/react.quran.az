@@ -5,8 +5,7 @@ import {
     Switch,
     Route,
     useHistory,
-    useLocation,
-    useParams
+    useLocation
 } from "react-router-dom";
 
 import Form from "./Form";
@@ -150,7 +149,6 @@ const App = () => {
     ];
 
     let history = useHistory();
-    let query = useParams();
 
     const onSearch = form => {
         if (form.s > 0 && form.s < 115) {
@@ -215,18 +213,15 @@ const App = () => {
                     exact={true}
                     strict={false}
                     path="/:soorah([1-9]|[1-8][0-9]|9[0-9]|10[0-9]|11[0-4])/:ayah([1-9]|[1-8][0-9]|9[0-9]|1[0-9]{2}|2[0-7][0-9]|28[0-6])"
-                    render={q => {
-                        {
-                            console.log(query);
-                        }
+                    render={q => (
                         <Ayah
                             soorahTitle={soorahList[q.match.params.soorah]}
                             translatorList={translatorList}
                             soorah={q.match.params.soorah}
                             ayah={q.match.params.ayah}
                             t={form.t}
-                        />;
-                    }}
+                        />
+                    )}
                     key={Math.random()}
                 />
                 <Route path="*" component={NotFound} status={404} />

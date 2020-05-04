@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import { FaExternalLinkAlt } from "react-icons/fa";
 import Highlighter from "react-highlight-words";
 
@@ -14,9 +16,9 @@ const SearchAyah = ({ ayah, mark }) => {
                 />
             </td>
             <td>
-                <a href={"/" + ayah.s + "/" + ayah.a + "?t=" + ayah.t}>
+                <Link to={"/" + ayah.s + "/" + ayah.a + "?t=" + ayah.t}>
                     <FaExternalLinkAlt />
-                </a>
+                </Link>
             </td>
         </tr>
     );

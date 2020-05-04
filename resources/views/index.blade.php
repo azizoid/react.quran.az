@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#155724"/>
 
     <title>Quran.az - Öz Kitabını Oxu</title>
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
@@ -22,7 +23,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a href="/" class="navbar-brand d-flex align-items-center text-muted">
         <img src="/img/kuran-logo.svg" width="30" height="30" class="d-inline-block align-top" alt="quran.az">&nbsp;
-        Quran.az
+        Quran.az{{rand(1,100)}}
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -30,10 +31,10 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a href="http://azerislam.com/index.php?lngs=aze&cats=2" class="nav-link" target="_blank">Yazılar</a>
+            <a href="http://azerislam.com/index.php?lngs=aze&cats=2" rel="noreferrer" class="nav-link" target="_blank">Yazılar</a>
           </li>
           <li class="nav-item">
-            <a href="https://www.nam.az" class="nav-link" target="_blank">Nam.az <span class="badge badge-danger">yeni</span></a>
+            <a href="https://www.nam.az" rel="noreferrer" class="nav-link" target="_blank">Nam.az <span class="badge badge-danger">yeni</span></a>
           </li>
         </ul>
       </div>
@@ -63,7 +64,7 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item active">&copy; 2003-<?=date('Y');?></li>
           <li class="breadcrumb-item"><a href="https://www.quran.az">Quran.az</a></li>
-          <li class="breadcrumb-item"><a href="https://www.nam.az">Nam.az</a></li>
+          <li class="breadcrumb-item"><a href="https://www.nam.az" rel="noreferrer">Nam.az</a></li>
         </ol>
       </nav>
     </footer>

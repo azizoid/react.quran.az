@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import Translator from "./Translator";
 
 const TranslatorList = ({ data, soorahTitle }) => {
@@ -11,9 +13,12 @@ const TranslatorList = ({ data, soorahTitle }) => {
     return (
         <ul className="nav nav-tabs nav-fill">
             <li className="nav-item">
-                <a href={"/" + data.s} className="nav-link active">
+                <Link
+                    to={"/" + data.s + "/?t=" + data.t}
+                    className="nav-link active"
+                >
                     {soorahTitle}
-                </a>
+                </Link>
             </li>
 
             <li className="nav-item dropdown">
@@ -30,8 +35,15 @@ const TranslatorList = ({ data, soorahTitle }) => {
 
                 <div className="dropdown-menu">
                     {translatorList.map((title, index) => {
+                        let url =
+                            "/" +
+                            data.s +
+                            (data.a ? "/" + data.a : "") +
+                            "?t=" +
+                            index;
                         return (
                             <Translator
+                                url={url}
                                 title={title}
                                 index={index}
                                 soorah={data.s}
