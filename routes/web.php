@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::view('/privacypolicy', 'privacy');
+
 Route::view('/{any?}', 'index')->where('any', '.*')->name('index');;
 // Route::view('/', 'index');
 
