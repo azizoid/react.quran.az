@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 
-const Form = ({ soorahList, translatorList, onSubmit }) => {
+import TRANSLATOR_LIST from "./assets/translatorList.js";
+import SOORAH_LIST from "./assets/soorahList.js";
+
+const Form = ({ onSubmit }) => {
     const [form, setForm] = useState({
         s: 0,
         a: "",
@@ -8,6 +11,8 @@ const Form = ({ soorahList, translatorList, onSubmit }) => {
         q: "",
         view: "empty"
     });
+    const translatorList = TRANSLATOR_LIST;
+    const soorahList = SOORAH_LIST;
 
     useEffect(() => {
         // console.log(formOld);

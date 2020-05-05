@@ -3,13 +3,10 @@ import { Link } from "react-router-dom";
 
 import Translator from "./Translator";
 
+import TRANSLATOR_LIST from "../assets/translatorList";
+
 const TranslatorList = ({ data, soorahTitle }) => {
-    const translatorList = [
-        ,
-        "Əlixan Musayev",
-        "Bünyadov-Məmmədəliyev",
-        "Эльмир Кулиев"
-    ];
+    const translatorList = TRANSLATOR_LIST;
     return (
         <ul className="nav nav-tabs nav-fill">
             <li className="nav-item">

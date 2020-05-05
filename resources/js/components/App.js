@@ -5,8 +5,7 @@ import {
     Switch,
     Route,
     useHistory,
-    useLocation,
-    useParams
+    useLocation
 } from "react-router-dom";
 
 import Form from "./Form";
@@ -17,25 +16,21 @@ import Soorah from "./pages/Soorah";
 import Ayah from "./pages/Ayah";
 import Search from "./pages/Search";
 
-import TRANSLATOR_LIST from "./assets/translatorList.js";
 import SOORAH_LIST from "./assets/soorahList.js";
 
 import LogRocket from "logrocket";
 LogRocket.init("hbjlsq/quranaz");
 
 const App = () => {
-    // let t = parseInt(new URLSearchParams(window.location.search).get("t"));
     let paramQuery = new URLSearchParams(useLocation().search);
     let t = paramQuery.get("t");
     if (!(t == 1 || t == 2 || t == 3)) t = 1;
 
     const [form, setForm] = useState({ t: t });
 
-    const translatorList = TRANSLATOR_LIST;
     const soorahList = SOORAH_LIST;
 
     let history = useHistory();
-    // let query = useParams();
 
     const onSearch = form => {
         if (form.s > 0 && form.s < 115) {
@@ -67,12 +62,7 @@ const App = () => {
 
     return (
         <>
-            <Form
-                soorahList={soorahList}
-                translatorList={translatorList}
-                onSubmit={onSearch}
-                formOld={form}
-            />
+            <Form onSubmit={onSearch} formOld={form} />
 
             <br />
 
@@ -90,7 +80,6 @@ const App = () => {
                     component={q => (
                         <Soorah
                             soorahTitle={soorahList[q.match.params.soorah]}
-                            translatorList={translatorList}
                             soorah={q.match.params.soorah}
                             t={form.t}
                         />
