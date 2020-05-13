@@ -23,7 +23,7 @@ const Search = ({ query, t }) => {
                     } else setEmpty(1);
                 });
         }
-    }, [query]);
+    }, [query, t]);
 
     const getData = v => {
         fetch("/api/search/" + query + "?page=" + v + "&t=" + t)

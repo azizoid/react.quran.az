@@ -1,6 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const Empty = () => {
+const Empty = ({ alert }) => {
+    console.log(alert);
     return (
         <>
             <div className="clearfix">
@@ -8,26 +10,35 @@ const Empty = () => {
                     <ol className="breadcrumb justify-content-center">
                         <li className="breadcrumb-item active">Oxu:</li>
                         <li className="breadcrumb-item ">
-                            <a href="/36">Ya-sin surəsi</a>
+                            <Link to="/36">Ya-sin surəsi</Link>
                         </li>
                         <li className="breadcrumb-item ">
-                            <a href="/55">Ər-Rəhman surəsi</a>
+                            <Link to="/55">Ər-Rəhman surəsi</Link>
                         </li>
                         <li className="breadcrumb-item ">
-                            <a href="/67">Əl-Mülk surəsi</a>
+                            <Link to="/67">Əl-Mülk surəsi</Link>
                         </li>
                         <li className="breadcrumb-item ">
-                            <a href="/2/255">Ayətul-Kürsi</a>
+                            <Link to="/2/255">Ayətul-Kürsi</Link>
                         </li>
                     </ol>
                 </nav>
             </div>
 
             <div className="clearfix">
-                <h6 className="alert alert-success text-right">
-                    Axtarışınızın <strong>uğurlu</strong> olması üçün aşağıdakı
-                    <strong>qaydalara</strong> riayət edin
-                </h6>
+                {alert === "danger" ? (
+                    <h6 className="alert alert-danger text-right">
+                        Axtarışınızın <strong>uğurlu</strong> olması üçün
+                        aşağıdakı
+                        <strong>qaydalara</strong> riayət edin
+                    </h6>
+                ) : (
+                    <h6 className="alert alert-success text-right">
+                        Axtarışınızın <strong>uğurlu</strong> olması üçün
+                        aşağıdakı
+                        <strong>qaydalara</strong> riayət edin
+                    </h6>
+                )}
 
                 <table cellPadding="10">
                     <tbody>

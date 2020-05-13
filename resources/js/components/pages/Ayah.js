@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 
 import TranslatorList from "./TranslatorList";
 import ColoredText from "./ColoredText";
-import Loader from "./Loader";
 
 import Skeleton from "react-loading-skeleton";
 
@@ -25,7 +24,6 @@ const Ayah = ({ soorah, ayah, t, soorahTitle }) => {
     });
 
     useEffect(() => {
-        // const url = "/" + soorah + "/" + ayah + "?t=" + t;
         const url = "/" + form.s + "/" + form.a + "?t=" + form.t;
 
         fetch("/api" + url)

@@ -25,6 +25,11 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->call(function () {
+        $tmp = Quran::select(['soorah_id as s', 'aya_id as a', 'content as c', 'translator_id as t'])->get()->random();
+            Notification::send($tmp, new TweetAyahNotification('Oxu'));
+        })->everyMinute();
+        //})->twiceDaily(10, 17);
     }
 
     /**

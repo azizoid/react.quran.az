@@ -14,8 +14,14 @@ const Soorah = ({ soorah, t, soorahTitle }) => {
     //empty - 1 returned empty
     //empty - 2 returned results
 
+    const [form, setForm] = useState({
+        s: Number(soorah),
+        t: Number(t)
+    });
+
     useEffect(() => {
-        fetch("/api/" + soorah + "?t=" + t)
+        const url = "/" + form.s + "?t=" + form.t;
+        fetch("/api" + url)
             .then(response => response.json())
             .then(v => {
                 if (v.out.length > 0) {
@@ -24,7 +30,17 @@ const Soorah = ({ soorah, t, soorahTitle }) => {
                     setData(v.data);
                 } else setEmpty(1);
             });
-    }, [soorah]);
+    }, [form.s, form.t]);
+
+    useEffect(() => {
+        setForm(prev => {
+            return {
+                ...prev,
+                s: Number(soorah),
+                t: Number(t)
+            };
+        });
+    }, []);
 
     return (
         <>
@@ -53,8 +69,7 @@ const Soorah = ({ soorah, t, soorahTitle }) => {
                                     <td>&nbsp;</td>
                                     <td>
                                         <h3 className="text-center">
-                                            بِسْمِ اللَّهِ الرَّحْمَٰنِ
-                                            الرَّحِيمِ
+                                            &#65021;
                                         </h3>
                                     </td>
                                     <td>&nbsp;</td>

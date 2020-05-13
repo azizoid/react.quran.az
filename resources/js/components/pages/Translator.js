@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Translators = ({ url, title }) => {
     return (
-        <Link className="dropdown-item" to={url}>
+        <Link to={url} className="dropdown-item">
             {title}
         </Link>
     );

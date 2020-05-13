@@ -25,7 +25,7 @@ const RandomAyah = () => {
     }, []);
 
     return (
-        <div className="card ">
+        <div className="card">
             <div className="card-header">
                 <ul className="nav nav-pills nav-fill card-header-pills">
                     <li className="nav-item">

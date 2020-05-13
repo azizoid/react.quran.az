@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import {
     BrowserRouter as Router,
@@ -11,22 +11,18 @@ import {
 import Form from "./Form";
 
 import Empty from "./pages/Empty";
-import NotFound from "./pages/NotFound";
 import Soorah from "./pages/Soorah";
 import Ayah from "./pages/Ayah";
 import Search from "./pages/Search";
 
 import SOORAH_LIST from "./assets/soorahList.js";
 
-import LogRocket from "logrocket";
-LogRocket.init("hbjlsq/quranaz");
-
 const App = () => {
     let paramQuery = new URLSearchParams(useLocation().search);
-    let t = paramQuery.get("t");
+    let t = paramQuery.get("t") || 1;
     if (!(t == 1 || t == 2 || t == 3)) t = 1;
 
-    const [form, setForm] = useState({ t: t });
+    // const [form, setForm] = useState({ t: t });
 
     const soorahList = SOORAH_LIST;
 
@@ -41,8 +37,9 @@ const App = () => {
         } else if (form.q.length > 3) {
             form.view = "search";
         } else form.view = "empty";
-        if (!(form.t === 1 || form.t === 2 || form.t === 3)) form.t = 1;
-        setForm(form);
+
+        if (!(form.t == 1 || form.t == 2 || form.t == 3)) form.t = 1;
+        // setForm(form);
 
         switch (form.view) {
             case "search":
@@ -60,48 +57,101 @@ const App = () => {
         }
     };
 
+    const translator = () => {
+        let t = paramQuery.get("t") || 1;
+        if (!(t == 1 || t == 2 || t == 3)) t = 1;
+        return t;
+    };
+
     return (
-        <>
-            <Form onSubmit={onSearch} formOld={form} />
-
-            <br />
-
-            <Switch>
-                <Route exact={true} path="/" component={() => <Empty />} />
-                <Route
-                    path="/search/:query"
-                    component={q => (
-                        <Search query={q.match.params.query} t={form.t} />
-                    )}
-                />
-                <Route
-                    exact={true}
-                    path="/:soorah([1-9]|[1-8][0-9]|9[0-9]|10[0-9]|11[0-4])"
-                    component={q => (
-                        <Soorah
-                            soorahTitle={soorahList[q.match.params.soorah]}
-                            soorah={q.match.params.soorah}
-                            t={form.t}
-                        />
-                    )}
-                ></Route>
-                <Route
-                    exact={true}
-                    strict={false}
-                    path="/:soorah([1-9]|[1-8][0-9]|9[0-9]|10[0-9]|11[0-4])/:ayah([1-9]|[1-8][0-9]|9[0-9]|1[0-9]{2}|2[0-7][0-9]|28[0-6])"
-                    component={q => (
-                        <Ayah
-                            soorahTitle={soorahList[q.match.params.soorah]}
-                            soorah={q.match.params.soorah}
-                            ayah={q.match.params.ayah}
-                            t={form.t}
-                        />
-                    )}
-                    key={Math.random()}
-                />
-                <Route path="*" component={NotFound} status={404} />
-            </Switch>
-        </>
+        <Switch>
+            <Route
+                exact={true}
+                path="/"
+                render={() => (
+                    <>
+                        <Form onSubmit={onSearch} />
+                        <br />
+                        <Empty />
+                    </>
+                )}
+            />
+            <Route
+                path="/search/:query"
+                render={q => {
+                    const formData = {
+                        q: q.match.params.query,
+                        t: translator()
+                    };
+                    return (
+                        <>
+                            <Form onSubmit={onSearch} formData={formData} />
+                            <br />
+                            <Search query={formData.q} t={formData.t} />
+                        </>
+                    );
+                }}
+            />
+            <Route
+                exact={true}
+                strict={false}
+                path="/:soorah([1-9]|[1-8][0-9]|9[0-9]|10[0-9]|11[0-4])"
+                render={q => {
+                    const formData = {
+                        s: q.match.params.soorah,
+                        t: translator()
+                    };
+                    return (
+                        <>
+                            <Form onSubmit={onSearch} formData={formData} />
+                            <br />
+                            <Soorah
+                                soorahTitle={soorahList[formData.s]}
+                                soorah={formData.s}
+                                t={formData.t}
+                            />
+                        </>
+                    );
+                }}
+                key={Math.random()}
+            ></Route>
+            <Route
+                exact={false}
+                strict={false}
+                path="/:soorah([1-9]|[1-8][0-9]|9[0-9]|10[0-9]|11[0-4])/:ayah([1-9]|[1-8][0-9]|9[0-9]|1[0-9]{2}|2[0-7][0-9]|28[0-6])"
+                render={q => {
+                    const formData = {
+                        s: q.match.params.soorah,
+                        a: q.match.params.ayah,
+                        t: translator()
+                    };
+                    return (
+                        <>
+                            <Form onSubmit={onSearch} formData={formData} />
+                            <br />
+                            <Ayah
+                                soorahTitle={soorahList[formData.s]}
+                                soorah={formData.s}
+                                ayah={formData.a}
+                                t={formData.t}
+                            />
+                        </>
+                    );
+                }}
+                key={Math.random()}
+            />
+            <Route
+                path="*"
+                render={() => (
+                    <>
+                        <Form onSubmit={onSearch} />
+                        <br />
+                        <Empty alert="danger" />
+                    </>
+                )}
+                status={404}
+            />
+        </Switch>
     );
 };
 

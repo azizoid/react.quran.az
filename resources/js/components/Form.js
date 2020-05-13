@@ -3,14 +3,16 @@ import React, { useState, useEffect } from "react";
 import TRANSLATOR_LIST from "./assets/translatorList.js";
 import SOORAH_LIST from "./assets/soorahList.js";
 
-const Form = ({ onSubmit }) => {
+const Form = ({ onSubmit, formData }) => {
     const [form, setForm] = useState({
         s: 0,
         a: "",
         t: 1,
         q: "",
-        view: "empty"
+        view: "empty",
+        ...formData
     });
+
     const translatorList = TRANSLATOR_LIST;
     const soorahList = SOORAH_LIST;
 
@@ -29,7 +31,7 @@ const Form = ({ onSubmit }) => {
 
     const onAyahChange = a => {
         setForm(prev => {
-            return { ...prev, a: parseInt(a), view: "ayah" };
+            return { ...prev, a: a, view: "ayah" };
         });
     };
 
@@ -47,7 +49,6 @@ const Form = ({ onSubmit }) => {
 
     const onSearch = event => {
         event.preventDefault();
-        // console.log(form);
         onSubmit(form);
     };
 
