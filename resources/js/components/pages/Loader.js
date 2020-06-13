@@ -1,16 +1,8 @@
 import React from "react";
 
 export default () => (
-    <div className="text-center">
-        <div className="lds-grid">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+    <div class="loadingio-spinner-eclipse-5rkdd8dfofv">
+        <div class="ldio-4rs3u70qdq">
             <div></div>
         </div>
     </div>

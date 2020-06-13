@@ -9,10 +9,13 @@ import { TitleComponent } from "../TitleComponent";
 const Soorah = ({ soorah, t, soorahTitle }) => {
     const [data, setData] = useState([]);
     const [out, setOut] = useState([]);
+
+    /*
+    0 - start
+    1 - not found
+    2 - result 
+    */
     const [empty, setEmpty] = useState(0);
-    //empty - 0 start
-    //empty - 1 returned empty
-    //empty - 2 returned results
 
     const [form, setForm] = useState({
         s: Number(soorah),
@@ -42,55 +45,55 @@ const Soorah = ({ soorah, t, soorahTitle }) => {
         });
     }, []);
 
+    if (empty < 2) {
+        return (
+            <div className="col-sm-12 text-center">
+                {empty === 1 ? (
+                    <div className="col-sm-12 alert alert-danger">
+                        Surə tapılmamışdır
+                    </div>
+                ) : (
+                    <Loader />
+                )}
+            </div>
+        );
+    }
+
     return (
         <>
             <TitleComponent
                 title={soorahTitle + " - Quran.az: Öz Kitabını Oxu"}
             />
             <div className="row">
-                {empty === 2 ? (
-                    <table
-                        id="quran"
-                        className="table table-striped table-borderless"
-                    >
-                        <thead>
+                <table
+                    id="quran"
+                    className="table table-striped table-borderless"
+                >
+                    <thead>
+                        <tr>
+                            <td colSpan="3">
+                                <TranslatorList
+                                    data={data}
+                                    soorahTitle={soorahTitle}
+                                />
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {data.s != 9 && (
                             <tr>
-                                <td colSpan="3">
-                                    <TranslatorList
-                                        data={data}
-                                        soorahTitle={soorahTitle}
-                                    />
+                                <td>&nbsp;</td>
+                                <td>
+                                    <h3 className="text-center">&#65021;</h3>
                                 </td>
+                                <td>&nbsp;</td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            {data.s != 9 && (
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>
-                                        <h3 className="text-center">
-                                            &#65021;
-                                        </h3>
-                                    </td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                            )}
-                            {out.map(ayah => {
-                                return <SoorahAyah ayah={ayah} key={ayah.id} />;
-                            })}
-                        </tbody>
-                    </table>
-                ) : (
-                    <div className="col-sm-12">
-                        {empty === 1 ? (
-                            <div className="col-sm-12 alert alert-danger">
-                                Surə tapılmamışdır
-                            </div>
-                        ) : (
-                            <Loader />
                         )}
-                    </div>
-                )}
+                        {out.map(ayah => {
+                            return <SoorahAyah ayah={ayah} key={ayah.id} />;
+                        })}
+                    </tbody>
+                </table>
             </div>
         </>
     );

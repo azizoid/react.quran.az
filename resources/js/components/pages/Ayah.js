@@ -66,7 +66,7 @@ const Ayah = ({ soorah, ayah, t, soorahTitle }) => {
 
     let description = "";
 
-    if (empty !== 2)
+    if (empty < 2)
         return (
             <div className="col-sm-12">
                 {empty === 1 ? (
@@ -101,7 +101,7 @@ const Ayah = ({ soorah, ayah, t, soorahTitle }) => {
                     </thead>
 
                     <tbody>
-                        {!(soorah == 1 && ayah == 1) && (
+                        {soorah !== 1 && ayah !== 1 && (
                             <tr>
                                 <td colSpan="3">
                                     <h3 className="text-center">&#65021;</h3>

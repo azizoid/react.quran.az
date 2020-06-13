@@ -9,6 +9,12 @@ import { TitleComponent } from "../TitleComponent";
 const Search = ({ query, t }) => {
     const [data, setData] = useState([]);
     const [out, setOut] = useState([]);
+
+    /*
+    0 - start
+    1 - not found
+    2 - result 
+    */
     const [empty, setEmpty] = useState(0);
 
     useEffect(() => {
@@ -36,74 +42,72 @@ const Search = ({ query, t }) => {
             });
     };
 
+    if (empty < 2) {
+        return (
+            <div className="col-sm-12 text-center">
+                {empty === 1 ? (
+                    <div className="col-sm-12 alert alert-danger">
+                        Kəlmə tapılmamışdır
+                    </div>
+                ) : (
+                    <Loader />
+                )}
+            </div>
+        );
+    }
+
     return (
         <>
             <TitleComponent title={query + " - Quran.az: Öz Kitabını Oxü"} />
             <div className="row">
-                {empty === 2 ? (
-                    <table
-                        id="quran"
-                        className="table table-striped table-borderless"
-                    >
-                        <thead>
-                            <tr>
-                                <td colSpan="3">
-                                    <Pagination
-                                        activePage={parseInt(data.current_page)}
-                                        itemsCountPerPage={parseInt(
-                                            data.per_page
-                                        )}
-                                        totalItemsCount={parseInt(data.total)}
-                                        pageRangeDisplayed={5}
-                                        innerClass="pagination justify-content-center"
-                                        itemClass="page-item"
-                                        linkClass="page-link"
-                                        onChange={getData.bind(this)}
-                                    />
-                                </td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {out.map(ayah => {
-                                return (
-                                    <SearchAyah
-                                        ayah={ayah}
-                                        key={ayah.id}
-                                        mark={query}
-                                    />
-                                );
-                            })}
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colSpan="3">
-                                    <Pagination
-                                        activePage={parseInt(data.current_page)}
-                                        itemsCountPerPage={parseInt(
-                                            data.per_page
-                                        )}
-                                        totalItemsCount={parseInt(data.total)}
-                                        pageRangeDisplayed={5}
-                                        innerClass="pagination justify-content-center"
-                                        itemClass="page-item"
-                                        linkClass="page-link"
-                                        onChange={getData.bind(this)}
-                                    />
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                ) : (
-                    <div className="col-sm-12">
-                        {empty === 1 ? (
-                            <div className="col-sm-12 alert alert-danger">
-                                Kəlmə tapılmamışdır
-                            </div>
-                        ) : (
-                            <Loader />
-                        )}
-                    </div>
-                )}
+                <table
+                    id="quran"
+                    className="table table-striped table-borderless"
+                >
+                    <thead>
+                        <tr>
+                            <td colSpan="3">
+                                <Pagination
+                                    activePage={parseInt(data.current_page)}
+                                    itemsCountPerPage={parseInt(data.per_page)}
+                                    totalItemsCount={parseInt(data.total)}
+                                    pageRangeDisplayed={5}
+                                    innerClass="pagination justify-content-center"
+                                    itemClass="page-item"
+                                    linkClass="page-link"
+                                    onChange={getData.bind(this)}
+                                />
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {out.map(ayah => {
+                            return (
+                                <SearchAyah
+                                    ayah={ayah}
+                                    key={ayah.id}
+                                    mark={query}
+                                />
+                            );
+                        })}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colSpan="3">
+                                <Pagination
+                                    activePage={parseInt(data.current_page)}
+                                    itemsCountPerPage={parseInt(data.per_page)}
+                                    totalItemsCount={parseInt(data.total)}
+                                    pageRangeDisplayed={5}
+                                    innerClass="pagination justify-content-center"
+                                    itemClass="page-item"
+                                    linkClass="page-link"
+                                    onChange={getData.bind(this)}
+                                />
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
         </>
     );
