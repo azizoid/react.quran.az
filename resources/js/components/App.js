@@ -20,7 +20,7 @@ import SOORAH_LIST from "./assets/soorahList.js";
 const App = () => {
     let paramQuery = new URLSearchParams(useLocation().search);
     let t = paramQuery.get("t") || 1;
-    if (!(t == 1 || t == 2 || t == 3)) t = 1;
+    if (!(t == 1 || t == 2 || t == 3 || t == 4)) t = 1;
 
     // const [form, setForm] = useState({ t: t });
 
@@ -38,7 +38,8 @@ const App = () => {
             form.view = "search";
         } else form.view = "empty";
 
-        if (!(form.t == 1 || form.t == 2 || form.t == 3)) form.t = 1;
+        if (!(form.t == 1 || form.t == 2 || form.t == 3 || form.t == 4))
+            form.t = 1;
         // setForm(form);
 
         switch (form.view) {
@@ -59,7 +60,7 @@ const App = () => {
 
     const translator = () => {
         let t = paramQuery.get("t") || 1;
-        if (!(t == 1 || t == 2 || t == 3)) t = 1;
+        if (!(t == 1 || t == 2 || t == 3 || t == 4)) t = 1;
         return t;
     };
 

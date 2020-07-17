@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use App\Http\Resources\QuranCollection;
 use App\Quran;
 
+use Illuminate\Support\Facades\Storage;
+
+
 class QuranController extends Controller
 {
     public function index($s=1)
@@ -14,7 +17,7 @@ class QuranController extends Controller
         $data       =   ['s'=>null, 'a'=>null, 'q'=>null, 't'=>1, 'view'=>'empty'];
         $out        =   [];
         $view       =   "search";
-        $trans      =   isset($_GET['t']) && is_numeric($_GET['t']) && in_array($_GET['t'], array(1,2,3)) ? $_GET['t'] : 1;
+        $trans      =   isset($_GET['t']) && is_numeric($_GET['t']) && in_array($_GET['t'], array(1,2,3,4)) ? $_GET['t'] : 1;
   
         $where      =   ['translator_id'=>$trans];
   
@@ -43,7 +46,7 @@ class QuranController extends Controller
         $detail = [];
         $nav = [];
 
-        $trans      =   isset($_GET['t']) && is_numeric($_GET['t']) && in_array($_GET['t'], array(1,2,3)) ? $_GET['t'] : 1;
+        $trans      =   isset($_GET['t']) && is_numeric($_GET['t']) && in_array($_GET['t'], array(1,2,3,4)) ? $_GET['t'] : 1;
   
         $where      =   ['translator_id'=>$trans];
   
@@ -80,7 +83,7 @@ class QuranController extends Controller
     {
         $data       =   ['s'=>null, 'a'=>null, 'q'=>null, 't'=>1, 'view'=>'empty'];
         $view       =   "search";
-        $trans      =   isset($_GET['t']) && is_numeric($_GET['t']) && in_array($_GET['t'], array(1,2,3)) ? $_GET['t'] : 1;
+        $trans      =   isset($_GET['t']) && is_numeric($_GET['t']) && in_array($_GET['t'], array(1,2,3,4)) ? $_GET['t'] : 1;
   
         $where      =   ['translator_id', $trans];
         $out        =   array();
@@ -111,7 +114,7 @@ class QuranController extends Controller
     {
         $data       =   ['s'=>null, 'a'=>null, 'q'=>null, 't'=>1, 'view'=>'empty'];
         $view       =   "search";
-        $trans      =   isset($_GET['t']) && is_numeric($_GET['t']) && in_array($_GET['t'], array(1,2,3)) ? $_GET['t'] : 1;
+        $trans      =   isset($_GET['t']) && is_numeric($_GET['t']) && in_array($_GET['t'], array(1,2,3,4)) ? $_GET['t'] : 1;
         $limit      =   is_numeric($limit) && $limit==1 ? 1 : $limit;
         $query      =   $out    =   "";
   
@@ -139,5 +142,5 @@ class QuranController extends Controller
         return response()->json(
             compact('out', 'data') 
          );
-    }
+        }
 }
