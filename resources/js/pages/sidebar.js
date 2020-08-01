@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import PrayerWidget from "./PrayerWidget";
-import RandomAyah from "./RandomAyah";
-import FacebookPage from "./FacebookPage";
+import PrayerWidget from "../sidebar/prayer.widget.component";
+import RandomAyah from "../sidebar/random.ayah.component";
+import FacebookPage from "../sidebar/facebook.page.component";
 
 const Sidebar = () => {
     return (

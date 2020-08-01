@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-import TRANSLATOR_LIST from "./assets/translatorList.js";
-import SOORAH_LIST from "./assets/soorahList.js";
+import TRANSLATOR_LIST from "../assets/translatorList.js";
+import SOORAH_LIST from "../assets/soorahList.js";
 
 const Form = ({ onSubmit, formData }) => {
     const [form, setForm] = useState({

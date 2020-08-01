@@ -8,12 +8,12 @@ import {
     useLocation
 } from "react-router-dom";
 
-import Form from "./Form";
+import Form from "./components/form.component";
 
-import Empty from "./pages/Empty";
-import Soorah from "./pages/Soorah";
-import Ayah from "./pages/Ayah";
-import Search from "./pages/Search";
+import Empty from "./pages/empty.page";
+import Soorah from "./pages/soorah.page";
+import Ayah from "./pages/ayah.page";
+import Search from "./pages/search.page";
 
 import SOORAH_LIST from "./assets/soorahList.js";
 

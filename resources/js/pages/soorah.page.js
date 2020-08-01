@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-import SoorahAyah from "./SoorahAyah";
-import TranslatorList from "./TranslatorList";
-import Loader from "./Loader";
+import SoorahAyah from "../components/soorah.ayah.component";
+import TranslatorList from "../components/translator.list.component";
+import Loader from "../components/loader.component";
 
-import { TitleComponent } from "../TitleComponent";
+import { TitleComponent } from "../components/title.component";
 
 const Soorah = ({ soorah, t, soorahTitle }) => {
     const [data, setData] = useState([]);

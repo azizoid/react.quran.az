@@ -1,5 +1,5 @@
 require("./bootstrap");
 
-require("./components/App");
+require("./index.js");
 
-require("./components/Sidebar");
+require("./pages/sidebar");
