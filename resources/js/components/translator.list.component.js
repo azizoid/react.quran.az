@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import Translator from "./Translator";
+import Translator from "./translator.component";
 
 import TRANSLATOR_LIST from "../assets/translatorList";
 

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory, useLocation } from "react-router-dom";
 
-import TranslatorList from "./TranslatorList";
-import ColoredText from "./ColoredText";
+import TranslatorList from "../components/translator.list.component";
+import ColoredText from "../components/colored.text.component";
 
 import Skeleton from "react-loading-skeleton";
 
-import { TitleComponent } from "../TitleComponent";
+import { TitleComponent } from "../components/title.component";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const Ayah = ({ soorah, ayah, t, soorahTitle }) => {

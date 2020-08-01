@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import SearchAyah from "./SearchAyah";
-import Loader from "./Loader";
+import SearchAyah from "../components/search.ayah.component";
+import Loader from "../components/loader.component";
 
 import Pagination from "react-js-pagination";
 
-import { TitleComponent } from "../TitleComponent";
+import { TitleComponent } from "../components/title.component";
 
 const Search = ({ query, t }) => {
     const [data, setData] = useState([]);
